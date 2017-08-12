@@ -17,6 +17,7 @@ namespace HappyHours.App
             _userArrivalScheduler.Start();
 
             Console.ReadKey();
+
         }
     }
 }
