@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8A27D16D-5329-4DF4-8C54-9467D66E683A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HappyHours.Logic</RootNamespace>
+    <AssemblyName>HappyHours.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rdParty\HtmlAgilityPack\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=1.18.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.1.18.0\lib\net451\MimeKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.1\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BL\ActivateEmailBL.cs" />
+    <Compile Include="BL\ChangePasswordBL.cs" />
+    <Compile Include="BL\HappyHourException.cs" />
+    <Compile Include="BL\SigninBL.cs" />
+    <Compile Include="BL\SignupBL.cs" />
+    <Compile Include="Configuration\ApiCredentials.cs" />
+    <Compile Include="Configuration\EmailTemplates.cs" />
+    <Compile Include="Configuration\HappyHoursConfiguration.cs" />
+    <Compile Include="Configuration\SMTPConfiguration.cs" />
+    <Compile Include="Core\DayHours.cs" />
+    <Compile Include="Core\HappyHourData.cs" />
+    <Compile Include="Core\HappyHourItem.cs" />
+    <Compile Include="Core\HappyHoursCredentials.cs" />
+    <Compile Include="Core\HappyHoursLoginParameters.cs" />
+    <Compile Include="Core\HappyHoursCoreBL.cs" />
+    <Compile Include="Core\HappyHourSummary.cs" />
+    <Compile Include="Core\HappyHourTimestampProvider.cs" />
+    <Compile Include="Core\HourItem.cs" />
+    <Compile Include="Core\PostData.cs" />
+    <Compile Include="Core\PostParameter.cs" />
+    <Compile Include="Emails\ActivationEmailParameters.cs" />
+    <Compile Include="Emails\ArrivalEmailParameters.cs" />
+    <Compile Include="Emails\EmailTemplateManager.cs" />
+    <Compile Include="Emails\ExitEmailParameters.cs" />
+    <Compile Include="Emails\GmailSendEmailParameters.cs" />
+    <Compile Include="Emails\IEmailTemplateParameters.cs" />
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Emails\GMailEmailSender.cs" />
+    <Compile Include="Helpers\Md5SecurityHelper.cs" />
+    <Compile Include="Helpers\PasswordEncryptor.cs" />
+    <Compile Include="Helpers\Storage.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3rdParty\HtmlAgilityPack\HtmlAgilityPack.dll" />
+    <Content Include="3rdParty\HtmlAgilityPack\HtmlAgilityPack.pdb" />
+    <Content Include="3rdParty\HtmlAgilityPack\HtmlAgilityPack.XML" />
+    <Content Include="3rdParty\Newtonsoft.Json\Newtonsoft.Json.dll" />
+    <Content Include="3rdParty\Newtonsoft.Json\Newtonsoft.Json.pdb" />
+    <Content Include="3rdParty\Newtonsoft.Json\Newtonsoft.Json.xml" />
+    <Content Include="Core\ChromeRequest.txt" />
+    <Content Include="Emails\Templates\ActivationEmail.html" />
+    <Content Include="Emails\Templates\ArrivalEmail.html" />
+    <Content Include="Emails\Templates\ExitEmail.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyHours.Dal\HappyHours.Dal.csproj">
+      <Project>{a5f388f1-675a-4bae-af99-1acd09450e41}</Project>
+      <Name>HappyHours.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HappyHours.Models\HappyHours.Models.csproj">
+      <Project>{C11FB1B2-CB91-4AE1-8E18-64B7462DD8DE}</Project>
+      <Name>HappyHours.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

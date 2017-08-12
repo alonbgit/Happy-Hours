@@ -1,0 +1,1 @@
+﻿sc create "HappyHours.Service" binpath= "\"C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Service.exe\" start=auto 
