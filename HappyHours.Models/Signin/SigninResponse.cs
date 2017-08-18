@@ -15,6 +15,8 @@ namespace HappyHours.Models.Signin
 
         public IEnumerable<DayTimeDetails> Days { get; set; }
 
-        public string User { get; set; }
+        public string UserDisplayName { get; set; }
+
+        public long UserId { get; set; } 
     }
 }

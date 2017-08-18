@@ -47,7 +47,8 @@ namespace HappyHours.Logic.BL
 
             return new SigninResponse()
             {
-                User = summaryResult.User,
+                UserId = result.Id,
+                UserDisplayName = summaryResult.User,
                 ExtraMinutes = summaryResult.ExtraMinutes,
                 LackMinutes = summaryResult.LackMinutes,
                 Days = summaryResult.DayDetails.Select(c => new DayTimeDetails()

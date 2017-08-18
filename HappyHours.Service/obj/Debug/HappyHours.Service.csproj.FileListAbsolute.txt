@@ -1,8 +1,6 @@
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Service.exe.config
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Service.exe
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Service.pdb
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\obj\Debug\HappyHours.Service.exe
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\obj\Debug\HappyHours.Service.pdb
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Dal.dll
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Logic.dll
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HtmlAgilityPack.dll
@@ -16,3 +14,5 @@ C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\HappyHours.Mo
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\Newtonsoft.Json.pdb
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\obj\Debug\HappyHours.Service.csprojResolveAssemblyReference.cache
+C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\obj\Debug\HappyHours.Service.exe
+C:\Projects\HappyHours\HappyHours.App\HappyHours.Service\obj\Debug\HappyHours.Service.pdb

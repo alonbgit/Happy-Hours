@@ -418,6 +418,8 @@ namespace HappyHours.Dal.Dataset
 	public partial class sp_SigninResult
 	{
 		
+		private long _Id;
+		
 		private string _SystemEmail;
 		
 		private string _SystemPassword;
@@ -428,6 +430,22 @@ namespace HappyHours.Dal.Dataset
 		
 		public sp_SigninResult()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="BigInt NOT NULL")]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemEmail", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]

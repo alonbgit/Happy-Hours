@@ -22,7 +22,12 @@ namespace HappyHours.Web.Controllers
         [HttpPost]
         public SigninResponse Index(SigninRequest request)
         {
-            return BL.Signin(request, db);
+            var result = BL.Signin(request, db);
+
+            var userId = SessionManager.Get<long?>("UserId");
+
+            SessionManager.Set("UserId", result.UserId);
+            return result;
         }
     }
 }
