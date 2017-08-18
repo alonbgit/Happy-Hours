@@ -165,8 +165,6 @@
     </Compile>
     <Compile Include="Helpers\IOrderedFilter.cs" />
     <Compile Include="Helpers\OrderedFilterProvider.cs" />
-    <Compile Include="Helpers\SessionManager.cs" />
-    <Compile Include="Helpers\TokenManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

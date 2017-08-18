@@ -37,16 +37,5 @@ namespace HappyHours.Web
 
             Storage.Initialize();
         }
-
-        public override void Init()
-        {
-            this.PostAuthenticateRequest += MvcApplication_PostAuthenticateRequest;
-            base.Init();
-        }
-
-        private void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
-        {
-            HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
-        }
     }
 }
