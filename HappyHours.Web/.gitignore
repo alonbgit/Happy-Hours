@@ -12,9 +12,3 @@ yarn-error.log
 *.njsproj
 *.sln
 
-*.suo
-*.user
-_ReSharper.*
-bin
-obj
-packages
