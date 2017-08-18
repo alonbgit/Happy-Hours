@@ -92,6 +92,41 @@ namespace HappyHours.Logic.BL
             };
         }
 
+        public CheckTACredentialsResponse CheckTACredentials(CheckTACredentialsRequest request, dbDataContext db)
+        {
+            var today = DateTime.Today;
+            var loginParameters = new HappyHoursLoginParameters()
+            {
+                Credentials = new HappyHoursCredentials()
+                {
+                    Username = request.TAEmail,
+                    Password = request.TAPassword,
+                    Number = request.TANumber
+                },
+                StartDate = new DateTime(today.Year, today.Month, 1),
+                EndDate = today
+            };
+
+            HappyHoursCoreBL manager = new HappyHoursCoreBL();
+
+            try
+            {
+                HappyHourSummary summaryResult = manager.GetSummary(loginParameters);
+            }
+            catch
+            {
+                return new CheckTACredentialsResponse()
+                {
+                    Valid = false
+                };
+            }
+
+            return new CheckTACredentialsResponse()
+            {
+                Valid = true
+            };
+        }
+
         private string CreateActivationLink(string activationLink)
         {
             var url = string.Format("http://{0}/api/ActivateEmail?Token={1}", ConfigHelper.Config.DomainName, activationLink);
@@ -100,18 +135,22 @@ namespace HappyHours.Logic.BL
 
         private void SendActivationEmail(string email, string user, string activationLink)
         {
-            GMailEmailSender.SendEmail(new GmailSendEmailParameters()
+            try
             {
-                From = ConfigHelper.Config.SMTP.From,
-                FromDisplayName = ConfigHelper.Config.SMTP.FromDisplayName,
-                Subject = "Welcome to Happy Hours!",
-                To = email,
-                Body = EmailTemplateManager.CreateActivationEmailBody(new ActivationEmailParameters()
+                GMailEmailSender.SendEmail(new GmailSendEmailParameters()
                 {
-                    User = user,
-                    ActivationLink = activationLink
-                })
-            });
+                    From = ConfigHelper.Config.SMTP.From,
+                    FromDisplayName = ConfigHelper.Config.SMTP.FromDisplayName,
+                    Subject = "Welcome to Happy Hours!",
+                    To = email,
+                    Body = EmailTemplateManager.CreateActivationEmailBody(new ActivationEmailParameters()
+                    {
+                        User = user,
+                        ActivationLink = activationLink
+                    })
+                });
+            }
+            catch (Exception ex) { }
         }
     }
 }

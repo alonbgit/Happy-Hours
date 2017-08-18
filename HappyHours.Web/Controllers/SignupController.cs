@@ -29,5 +29,11 @@ namespace HappyHours.Web.Controllers
         {
             return BL.CheckEmailExist(request, db);
         }
+
+        [HttpPost]
+        public CheckTACredentialsResponse CheckTACredentials(CheckTACredentialsRequest request)
+        {
+            return BL.CheckTACredentials(request, db);
+        }
     }
 }

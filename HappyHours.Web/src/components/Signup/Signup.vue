@@ -63,12 +63,22 @@
         </div>
 
         <div v-if="currentStep == 3">
-          <p>An email with activation link was sent to your email - {{ user.email }}</p>
+          <div class="form-item">
+            <p>An email with activation link was sent to your email - {{ user.email }}</p>
+          </div>
+
+          <div class="form-item">
+            <button class="btn btn-right" @click="onSigninClick">Sign in</button>
+          </div>
+        </div>
+
+        <div class="form-item">
+          <div class="field-error" v-show="errors.has('globalError')">{{ errors.first('globalError') }}</div>
         </div>
 
         <div class="form-item">
           <button class="btn" @click.prevent="onPrevStep" v-show="currentStep == 2">Previous</button>
-          <button class="btn btn-right" @click.prevent="onNextStep">Next</button>
+          <button class="btn btn-right" @click.prevent="onNextStep" v-show="currentStep < 3">Next</button>
         </div>
 
       </div>
@@ -80,8 +90,13 @@
 <script>
 
   import { ApiCredentials } from '../../ApiData';
+  import { validatorMixin } from '../../mixins/validatorMixins';
 
   export default {
+
+    mixins: [validatorMixin],
+
+    apiCredentials: null,
 
     data() {
       return {
@@ -100,6 +115,8 @@
     methods: {
 
       onNextStep() {
+
+        this.clearErrors();
 
         if (this.currentStep == 1) {
           this.handleStep1();
@@ -147,9 +164,11 @@
 
           // in case step1 sync validations passed, we now check if the TA credentials
           // correct
-          this.isTACredentialsExist().then(({data}) => {
-            if (data.Exist)
-              this.errors.add('email', 'email already exist');
+          this.perfornSignup().then(({data}) => {
+            if (data.ErrorCode == 3)
+              this.errors.add('globalError', 'Invalid TA Credentials');
+            else if (data.ErrorCode == 2)
+              this.errors.add('globalError', 'email already exist');
             else
               this.currentStep++;
           });
@@ -158,23 +177,15 @@
 
       },
 
-      markFieldsAsTouched(fields) {
+      perfornSignup() {
 
-        fields.map((field) => {
-          this.$validator.flag(field, {
-            touched: true
-          });
-        });
-
-      },
-
-      isTACredentialsExist() {
-
-        return this.$http.post('http://HappyHours.Web/api/Signup/CheckTACredentials', {
-          taEmail: this.user.taEmail,
-          taPassword: this.user.taPassword,
-          taNumber: this.user.taNumber,
-          credentials: ApiCredentials
+        return this.$http.post('http://HappyHours.Web/api/Signup', {
+          email: this.user.email,
+          password: this.user.password,
+          systemEmail: this.user.systemEmail,
+          systemPassword: this.user.systemPassword,
+          systemNumber: this.user.systemNumber,
+          credentials: this.apiCredentials
         });
 
       },
@@ -183,15 +194,27 @@
 
         return this.$http.post('http://HappyHours.Web/api/Signup/CheckEmailExist', {
           email: this.user.email,
-          credentials: ApiCredentials
+          credentials: this.apiCredentials
         });
 
       },
 
       onPrevStep() {
+
+        this.clearErrors();
+
         this.currentStep--;
+
+      },
+
+      onSigninClick() {
+        this.$router.push('/Signin');
       }
 
+    },
+
+    created() {
+      this.apiCredentials = ApiCredentials;
     }
 
 }

@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 
 namespace HappyHours.Web.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authenticate(2)]
     public class SigninController : BaseApiController
     {

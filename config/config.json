@@ -8,7 +8,7 @@
   "SMTP": {
     "From": "manager.happyhours@gmail.com",
     "FromDisplayName": "Happy Hours",
-    "Password": "123"
+    "Password": "Sc2G4!1AdbCsd3S1dX"
   },
   "EmailTemplates": {
     "ActivationEmail": "C:\\Projects\\HappyHours\\HappyHours.App\\HappyHours.Logic\\Emails\\Templates\\ActivationEmail.html",
