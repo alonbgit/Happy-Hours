@@ -2,8 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router';
 import { routes } from './routes';
+import VeeValidate from 'vee-validate';
+import VueResource from 'vue-resource';
 
 Vue.use(VueRouter);
+Vue.use(VeeValidate);
+Vue.use(VueResource);
 
 const router = new VueRouter({
   routes,

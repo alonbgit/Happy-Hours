@@ -50,6 +50,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signin\SigninRequest.cs" />
     <Compile Include="Signin\SigninResponse.cs" />
+    <Compile Include="Signup\CheckEmailExistRequest.cs" />
+    <Compile Include="Signup\CheckEmailExistResponse.cs" />
     <Compile Include="Signup\SignupRequest.cs" />
     <Compile Include="Signup\SignupResponse.cs" />
   </ItemGroup>

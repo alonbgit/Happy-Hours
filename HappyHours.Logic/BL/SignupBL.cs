@@ -74,6 +74,24 @@ namespace HappyHours.Logic.BL
             };
         }
 
+        public CheckEmailExistResponse CheckEmailExist(CheckEmailExistRequest request, dbDataContext db)
+        {
+            var result = db.sp_GetUserStatusByEmail(request.Email).FirstOrDefault();
+
+            if (result != null)
+            {
+                return new CheckEmailExistResponse()
+                {
+                    Exist = true
+                };
+            }
+
+            return new CheckEmailExistResponse()
+            {
+                Exist = false
+            };
+        }
+
         private string CreateActivationLink(string activationLink)
         {
             var url = string.Format("http://{0}/api/ActivateEmail?Token={1}", ConfigHelper.Config.DomainName, activationLink);
