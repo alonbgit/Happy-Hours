@@ -1,4 +1,0 @@
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Models\bin\Debug\HappyHours.Models.dll
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Models\bin\Debug\HappyHours.Models.pdb
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Models\obj\Debug\HappyHours.Models.dll
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Models\obj\Debug\HappyHours.Models.pdb
