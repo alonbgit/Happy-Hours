@@ -1,5 +1,4 @@
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Dal\bin\Debug\HappyHours.Dal.dll
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Dal\bin\Debug\HappyHours.Dal.pdb
-C:\Projects\HappyHours\HappyHours.App\HappyHours.Dal\obj\Debug\HappyHours.Dal.csprojResolveAssemblyReference.cache
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Dal\obj\Debug\HappyHours.Dal.dll
 C:\Projects\HappyHours\HappyHours.App\HappyHours.Dal\obj\Debug\HappyHours.Dal.pdb
