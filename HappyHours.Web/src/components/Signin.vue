@@ -44,14 +44,12 @@
 
 <script>
 
-  import { ApiCredentials } from '../ApiData';
   import { validatorMixin } from '../mixins/validatorMixins';
+  import { apiMixins } from '../mixins/apiMixins';
 
   export default {
 
-    mixins: [validatorMixin],
-
-    apiCredentials: null,
+    mixins: [validatorMixin, apiMixins],
 
     data() {
       return {
@@ -94,7 +92,7 @@
 
       performSignin() {
 
-        return this.$http.post('http://HappyHours.Web/api/Signin', {
+        return this.$http.post('Signin', {
           credentials: this.apiCredentials,
           email: this.user.email,
           password: this.user.password
@@ -102,10 +100,6 @@
 
       }
 
-    },
-
-    created() {
-      this.apiCredentials = ApiCredentials;
     }
 
   }

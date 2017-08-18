@@ -89,14 +89,12 @@
 
 <script>
 
-  import { ApiCredentials } from '../../ApiData';
   import { validatorMixin } from '../../mixins/validatorMixins';
+  import { apiMixins } from '../../mixins/apiMixins';
 
   export default {
 
-    mixins: [validatorMixin],
-
-    apiCredentials: null,
+    mixins: [validatorMixin, apiMixins],
 
     data() {
       return {
@@ -179,7 +177,7 @@
 
       perfornSignup() {
 
-        return this.$http.post('http://HappyHours.Web/api/Signup', {
+        return this.$http.post('Signup', {
           email: this.user.email,
           password: this.user.password,
           systemEmail: this.user.systemEmail,
@@ -192,7 +190,7 @@
 
       isEmailExist() {
 
-        return this.$http.post('http://HappyHours.Web/api/Signup/CheckEmailExist', {
+        return this.$http.post('Signup/CheckEmailExist', {
           email: this.user.email,
           credentials: this.apiCredentials
         });
@@ -211,10 +209,6 @@
         this.$router.push('/Signin');
       }
 
-    },
-
-    created() {
-      this.apiCredentials = ApiCredentials;
     }
 
 }

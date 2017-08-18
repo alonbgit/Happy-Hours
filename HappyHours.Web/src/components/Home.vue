@@ -29,7 +29,7 @@
       for him.
     </p>
 
-    <button class="create-account-btn">Create Account</button>
+    <button class="create-account-btn" @click="$router.push('/Signin')">Create Account</button>
 
   </div>
 </template>

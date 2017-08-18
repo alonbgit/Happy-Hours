@@ -9,6 +9,8 @@ Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueResource);
 
+Vue.http.options.root = 'http://HappyHours.Web/api/';
+
 const router = new VueRouter({
   routes,
   mode: 'history'
