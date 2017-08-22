@@ -50,10 +50,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.4.3.1\lib\net46\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -83,7 +80,6 @@
     <Compile Include="BL\HappyHourException.cs" />
     <Compile Include="BL\SigninBL.cs" />
     <Compile Include="BL\SignupBL.cs" />
-    <Compile Include="Configuration\ApiCredentials.cs" />
     <Compile Include="Configuration\EmailTemplates.cs" />
     <Compile Include="Configuration\HappyHoursConfiguration.cs" />
     <Compile Include="Configuration\SMTPConfiguration.cs" />

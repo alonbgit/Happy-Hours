@@ -8,8 +8,6 @@ namespace HappyHours.Logic.Configuration
 {
     public class HappyHoursConfiguration
     {
-        public ApiCredentials ApiCredentials { get; set; }
-
         public string ChromeRequestFile { get; set; }
 
         public string SecurityKey { get; set; }
