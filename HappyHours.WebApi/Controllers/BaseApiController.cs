@@ -13,7 +13,6 @@ namespace HappyHours.WebApi.Controllers
     public class BaseApiController : ApiController
     {
         protected dbDataContext db = new dbDataContext();
-        private ApplicationUserManager _userManager;
 
         protected override void Dispose(bool disposing)
         {
