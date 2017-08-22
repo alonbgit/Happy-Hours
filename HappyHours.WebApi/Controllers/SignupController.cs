@@ -13,7 +13,6 @@ using System.Web.Http;
 
 namespace HappyHours.WebApi.Controllers
 {
-    [Authenticate(2)]
     public class SignupController : BaseApiController
     {
         private SignupBL BL = new SignupBL();

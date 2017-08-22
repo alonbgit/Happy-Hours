@@ -1,8 +1,4 @@
 {
-  "ApiCredentials": {
-    "APIUsername": "happy123",
-    "APIPassword": "happy123!"
-  },
   "ChromeRequestFile": "C:\\Projects\\HappyHours\\HappyHours.App\\HappyHours.Logic\\Core\\ChromeRequest.txt",
   "SecurityKey": "Fds3dS1S!fht4dScsx1",
   "SMTP": {

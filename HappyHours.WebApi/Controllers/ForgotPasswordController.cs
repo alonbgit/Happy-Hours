@@ -8,7 +8,6 @@ using System.Web.Http;
 
 namespace HappyHours.WebApi.Controllers
 {
-    [Authenticate(2)]
     public class ForgotPasswordController : BaseApiController
     {
     }

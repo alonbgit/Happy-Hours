@@ -32,11 +32,7 @@ namespace HappyHours.WebApi.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            //var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-
-            //ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
             SigninBL bl = new SigninBL();
-            //ApplicationUser user = null;
             using (dbDataContext db = new dbDataContext())
             {
                 try
@@ -49,12 +45,6 @@ namespace HappyHours.WebApi.Providers
                 }
                 catch(HappyHourException ex)
                 {
-                    /*if (ex.ErrorCode == ErrorCode.InvalidUser)
-                    {
-                        context.SetError("invalid_grant", "The user name or password is incorrect.");
-                        return;
-                    }*/
-
                     context.SetError("invalid_grant", ((int)ex.ErrorCode).ToString());
                     return;
                 }
@@ -70,22 +60,6 @@ namespace HappyHours.WebApi.Providers
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
-
-            /*if (user == null)
-            {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
-            }*/
-
-            /*ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
-
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-            context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);*/
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

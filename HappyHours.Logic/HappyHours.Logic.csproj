@@ -80,7 +80,6 @@
     <Compile Include="BL\HappyHourException.cs" />
     <Compile Include="BL\SigninBL.cs" />
     <Compile Include="BL\SignupBL.cs" />
-    <Compile Include="Configuration\ApiCredentials.cs" />
     <Compile Include="Configuration\EmailTemplates.cs" />
     <Compile Include="Configuration\HappyHoursConfiguration.cs" />
     <Compile Include="Configuration\SMTPConfiguration.cs" />

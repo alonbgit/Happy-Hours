@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace HappyHours.WebApi.Controllers
 {
-    [Authenticate(2)]
+    [Authorize]
     public class ChangePasswordController : BaseApiController
     {
         private ChangePasswordBL BL = new ChangePasswordBL();
