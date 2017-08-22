@@ -1,0 +1,74 @@
+
+.form-container {
+  width: 500px;
+  border: 1px solid #2b6806;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 200px;
+  padding-bottom: 20px;
+}
+
+.form-header {
+  height: 31px;
+  width: 100%;
+  background-color: #cffcb3;
+  margin-bottom: 7px;
+  line-height: 31px;
+  font-weight: bold;
+  color: #3e3f3e;
+  border-radius: 5px;
+}
+
+.form-header > span {
+  margin-left: 7px;
+}
+
+.form-content {
+}
+
+.form-item {
+  padding-left: 20px;
+  padding-right: 60px;
+  padding-top: 10px;
+  overflow: auto;
+}
+
+.form-item > label {
+  width: 170px;
+  height: 31px;
+  line-height: 31px;
+  display: inline-block;
+  float: left;
+}
+
+.form-item input {
+  float: right;
+  margin-right: 70px;
+}
+
+.input-item {
+  float: right;
+  width: 210px;
+}
+
+input[type="text"], input[type="password"] {
+  height: 25px;
+  font-size: 16px;
+  padding-left: 5px;
+  float: left;
+  width: 100%;
+}
+
+.field-error {
+  background-color: #f98686;
+  font-size: 12px;
+  display: inline-block;
+  float: left;
+  clear: both;
+  margin-top: 6px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  border-radius: 3px;
+  width: 100%;
+}

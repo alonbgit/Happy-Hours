@@ -1,0 +1,27 @@
+
+.btn {
+  height: 35px;
+  width: 100px;
+  background-color: #68c468;
+  color: white;
+  border-radius: 3px;
+  padding: 0;
+  border: none;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 14px;
+
+}
+
+.btn:hover {
+  background-color: #449D44;
+  cursor: pointer;
+}
+
+.btn-center {
+  margin: auto;
+}
+
+.btn-right {
+  float: right;
+}
