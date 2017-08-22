@@ -243,6 +243,7 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SigninController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\UpdateInformationController.cs" />

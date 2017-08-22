@@ -10,6 +10,9 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using HappyHours.WebApi.Models;
+using HappyHours.Logic.BL;
+using HappyHours.Dal.Dataset;
+using HappyHours.Models.Common;
 
 namespace HappyHours.WebApi.Providers
 {
@@ -29,17 +32,52 @@ namespace HappyHours.WebApi.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            //var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            //ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            SigninBL bl = new SigninBL();
+            //ApplicationUser user = null;
+            using (dbDataContext db = new dbDataContext())
+            {
+                try
+                {
+                    var response = bl.Signin(new HappyHours.Models.Signin.SigninRequest()
+                    {
+                        Email = context.UserName,
+                        Password = context.Password
+                    }, db);
+                }
+                catch(HappyHourException ex)
+                {
+                    /*if (ex.ErrorCode == ErrorCode.InvalidUser)
+                    {
+                        context.SetError("invalid_grant", "The user name or password is incorrect.");
+                        return;
+                    }*/
 
-            if (user == null)
+                    context.SetError("invalid_grant", ((int)ex.ErrorCode).ToString());
+                    return;
+                }
+                catch(Exception ex)
+                {
+                    context.SetError("invalid_grant", ((int)ErrorCode.InternalServerError).ToString());
+                }
+            }
+
+            ClaimsIdentity oAuthIdentity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
+            ClaimsIdentity cookiesIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationType);
+            AuthenticationProperties properties = CreateProperties(context.UserName);
+            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            context.Validated(ticket);
+            context.Request.Context.Authentication.SignIn(cookiesIdentity);
+
+            /*if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
-            }
+            }*/
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+            /*ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
@@ -47,7 +85,7 @@ namespace HappyHours.WebApi.Providers
             AuthenticationProperties properties = CreateProperties(user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
+            context.Request.Context.Authentication.SignIn(cookiesIdentity);*/
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

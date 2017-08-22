@@ -2,6 +2,8 @@
 using HappyHours.Logic.BL;
 using HappyHours.Models.Signup;
 using HappyHours.WebApi.Attributes;
+using HappyHours.WebApi.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
