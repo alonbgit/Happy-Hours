@@ -31,6 +31,10 @@
           <div class="field-error" v-show="errors.has('globalError')">{{ errors.first('globalError') }}</div>
         </div>
 
+        <div class="form-item" v-if="resendEmail">
+          <a href="#">Resend email</a>
+        </div>
+
         <div class="form-item">
           <button class="btn btn-right" @click.prevent="signin">Signin</button>
         </div>
@@ -45,18 +49,20 @@
 <script>
 
   import { validatorMixin } from '../mixins/validatorMixins';
-  import { apiMixins } from '../mixins/apiMixins';
+  import queryStringBuilder from '../queryStringBuilder.js';
+  import storageManager from '../storageManager';
 
   export default {
 
-    mixins: [validatorMixin, apiMixins],
+    mixins: [validatorMixin],
 
     data() {
       return {
         user: {
           email: '',
           password: ''
-        }
+        },
+        resendEmail: false
       }
     },
 
@@ -76,14 +82,39 @@
           // in case all validations passed, we perform ajax call to signin
           this.performSignin().then(({data}) => {
 
+            this.resendEmail = false;
             this.clearErrors();
 
-            if (data.ErrorCode == 1)
-              this.errors.add('globalError', 'Invalid Email/Password');
-            else if (data.ErrorCode == 6)
-              this.errors.add('globalError', 'Please verify your email.');
-            else
-              this.$router.push('/');
+            storageManager.setTokenBearer(data.access_token);
+
+            this.$router.push('/');
+
+          }, (error) => {
+
+            this.resendEmail = false;
+            this.clearErrors();
+
+            let errorResponse = JSON.parse(error.bodyText);
+            let errorCode =  errorResponse.error_description;
+
+            switch(errorCode) {
+
+              case '1':
+                this.errors.add('globalError', 'Invalid Email/Password');
+                break;
+              case '2':
+                this.errors.add('globalError', 'Please verify your email.');
+                break;
+              case '6':
+                this.errors.add('globalError', 'Please activate the link that was sent to your email');
+                this.resendEmail = true;
+                break;
+              default:
+                this.errors.add('globalError', 'Internal server error');
+                break;
+
+            }
+
           });
 
         });
@@ -92,10 +123,16 @@
 
       performSignin() {
 
-        return this.$http.post('Signin', {
-          credentials: this.apiCredentials,
-          email: this.user.email,
+        var request = queryStringBuilder({
+          grant_type: 'password',
+          username: this.user.email,
           password: this.user.password
+        });
+
+        return this.$http.post('Token', request, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
         });
 
       }

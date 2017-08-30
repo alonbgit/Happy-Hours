@@ -9,7 +9,5 @@ namespace HappyHours.Models.Common
 {
     public class BaseRequest
     {
-        [Required]
-        public Credentials Credentials { get; set; }
     }
 }

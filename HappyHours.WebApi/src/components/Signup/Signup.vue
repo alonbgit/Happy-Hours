@@ -90,11 +90,11 @@
 <script>
 
   import { validatorMixin } from '../../mixins/validatorMixins';
-  import { apiMixins } from '../../mixins/apiMixins';
+  import storageManager from '../../storageManager';
 
   export default {
 
-    mixins: [validatorMixin, apiMixins],
+    mixins: [validatorMixin],
 
     data() {
       return {
@@ -136,6 +136,11 @@
           if (!isValid)
             return;
 
+          if (this.user.password != this.user.confirmPassword) {
+            this.errors.add('globalError', 'Password and Confirm Password must be the same');
+            return;
+          }
+
           // in case step1 sync validations passed, we now check if the email already exist
           // using http ajax request
           this.isEmailExist().then(({data}) => {
@@ -163,12 +168,36 @@
           // in case step1 sync validations passed, we now check if the TA credentials
           // correct
           this.perfornSignup().then(({data}) => {
-            if (data.ErrorCode == 3)
-              this.errors.add('globalError', 'Invalid TA Credentials');
-            else if (data.ErrorCode == 2)
-              this.errors.add('globalError', 'email already exist');
-            else
+
+            if (data.ErrorCode) {
+              if (data.ErrorCode == 3)
+                this.errors.add('globalError', 'Invalid TA Credentials');
+              else if (data.ErrorCode == 2)
+                this.errors.add('globalError', 'Email already exist');
+              else
+                this.errors.add('globalError', 'Internal server error');
+            }
+            else {
+              debugger;
+              //storageManager.setTokenBearer();
               this.currentStep++;
+            }
+
+          }, (error) => {
+
+            let errorResponse = JSON.parse(error.bodyText);
+            let errorCode =  errorResponse.error_description;
+
+            switch(errorCode) {
+              case '1':
+                this.errors.add('globalError', 'Invalid Email/Password');
+                break;
+              case '2':
+                this.errors.add('globalError', 'Please verify your email.');
+                break;
+
+            }
+
           });
 
         });
@@ -177,7 +206,7 @@
 
       perfornSignup() {
 
-        return this.$http.post('Signup', {
+        return this.$http.post('api/Signup', {
           email: this.user.email,
           password: this.user.password,
           systemEmail: this.user.systemEmail,
@@ -190,7 +219,7 @@
 
       isEmailExist() {
 
-        return this.$http.post('Signup/CheckEmailExist', {
+        return this.$http.post('api/Signup/CheckEmailExist', {
           email: this.user.email,
           credentials: this.apiCredentials
         });

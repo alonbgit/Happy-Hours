@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using HappyHours.WebApi.Attributes;
+using System.Web;
 using System.Web.Mvc;
 
 namespace HappyHours.WebApi

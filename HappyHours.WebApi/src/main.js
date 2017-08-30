@@ -4,12 +4,21 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import VeeValidate from 'vee-validate';
 import VueResource from 'vue-resource';
+import storageManager from './storageManager';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueResource);
 
-Vue.http.options.root = 'http://HappyHours.Web/api/';
+Vue.http.options.root = 'http://HappyHours.Web/';
+
+Vue.http.interceptors.push((request, next) => {
+  var token = storageManager.getTokenBearer();
+  if (token) {
+    request.headers.set('Authorization', `Bearer ${token}`);
+  }
+  next()
+});
 
 const router = new VueRouter({
   routes,

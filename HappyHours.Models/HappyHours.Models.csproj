@@ -44,7 +44,6 @@
     <Compile Include="ChangePassword\ChangePasswordRequest.cs" />
     <Compile Include="Common\BaseRequest.cs" />
     <Compile Include="Common\BaseResponse.cs" />
-    <Compile Include="Common\Credentials.cs" />
     <Compile Include="Common\DayTimeDetails.cs" />
     <Compile Include="Common\ErrorCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
