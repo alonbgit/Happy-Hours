@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div class="form-container">
+    <div class="form-container" :class="{ 'disabled': isLoading }">
 
       <div class="form-header">
         <span>Signup</span>
@@ -72,6 +72,16 @@
           </div>
         </div>
 
+        <div v-if="currentStep == 4">
+          <div class="form-item">
+            <p>Thank you. The registeration process completed successfully</p>
+          </div>
+
+          <div class="form-item">
+            <button class="btn btn-right" @click="onSigninClick">Sign in</button>
+          </div>
+        </div>
+
         <div class="form-item">
           <div class="field-error" v-show="errors.has('globalError')">{{ errors.first('globalError') }}</div>
         </div>
@@ -79,6 +89,7 @@
         <div class="form-item">
           <button class="btn" @click.prevent="onPrevStep" v-show="currentStep == 2">Previous</button>
           <button class="btn btn-right" @click.prevent="onNextStep" v-show="currentStep < 3">Next</button>
+          <app-loading isLoading="isLoading" v-if="isLoading"/>
         </div>
 
       </div>
@@ -91,8 +102,13 @@
 
   import { validatorMixin } from '../../mixins/validatorMixins';
   import storageManager from '../../storageManager';
+  import Loading from '../Loading.vue';
 
   export default {
+
+    components: {
+      appLoading: Loading
+    },
 
     mixins: [validatorMixin],
 
@@ -103,10 +119,11 @@
           email: '',
           password: '',
           confirmPassword: '',
-          systemEmail: '',
-          systemPassword: '',
-          systemNumber: ''
-        }
+          systemEmail: 'alon.b@appnext.com',
+          systemPassword: '200357648',
+          systemNumber: '623115'
+        },
+        isLoading: false
       }
     },
 
@@ -141,13 +158,19 @@
             return;
           }
 
+          this.isLoading = true;
+
           // in case step1 sync validations passed, we now check if the email already exist
           // using http ajax request
           this.isEmailExist().then(({data}) => {
+            this.isLoading = false;
             if (data.Exist)
               this.errors.add('email', 'email already exist');
             else
               this.currentStep++;
+          }, (error) => {
+            this.isLoading = false;
+            console.log(error);
           });
 
         });
@@ -165,9 +188,13 @@
           if (!isValid)
             return;
 
+          this.isLoading = true;
+
           // in case step1 sync validations passed, we now check if the TA credentials
           // correct
           this.perfornSignup().then(({data}) => {
+
+            this.isLoading = false;
 
             if (data.ErrorCode) {
               if (data.ErrorCode == 3)
@@ -178,12 +205,15 @@
                 this.errors.add('globalError', 'Internal server error');
             }
             else {
-              debugger;
-              //storageManager.setTokenBearer();
-              this.currentStep++;
+              if (data.IsEmailVerificationRequired)
+                this.currentStep++;
+              else
+                this.currentStep+=2;
             }
 
           }, (error) => {
+
+            this.isLoading = false;
 
             let errorResponse = JSON.parse(error.bodyText);
             let errorCode =  errorResponse.error_description;
@@ -247,5 +277,6 @@
 </script>
 
 <style scoped>
+
 
 </style>

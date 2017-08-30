@@ -19,5 +19,7 @@ namespace HappyHours.Logic.Configuration
         public string DomainName { get; set; }
 
         public int UserArrivalSchedulerInterval { get; set; }
+
+        public bool SignupActivationRequired { get; set; }
     }
 }

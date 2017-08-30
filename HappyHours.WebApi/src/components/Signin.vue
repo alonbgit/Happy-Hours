@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div class="form-container">
+    <div class="form-container" :class="{ 'disabled': isLoading }">
 
       <div class="form-header">
         <span>Signin</span>
@@ -37,6 +37,7 @@
 
         <div class="form-item">
           <button class="btn btn-right" @click.prevent="signin">Signin</button>
+          <app-loading isLoading="isLoading" v-if="isLoading"/>
         </div>
 
       </div>
@@ -51,8 +52,13 @@
   import { validatorMixin } from '../mixins/validatorMixins';
   import queryStringBuilder from '../queryStringBuilder.js';
   import storageManager from '../storageManager';
+  import Loading from './Loading.vue';
 
   export default {
+
+    components: {
+      appLoading: Loading
+    },
 
     mixins: [validatorMixin],
 
@@ -62,7 +68,8 @@
           email: '',
           password: ''
         },
-        resendEmail: false
+        resendEmail: false,
+        isLoading: false
       }
     },
 
@@ -79,8 +86,12 @@
           if (!isValid)
             return;
 
+          this.isLoading = true;
+
           // in case all validations passed, we perform ajax call to signin
           this.performSignin().then(({data}) => {
+
+            this.isLoading = false;
 
             this.resendEmail = false;
             this.clearErrors();
@@ -90,6 +101,8 @@
             this.$router.push('/');
 
           }, (error) => {
+
+            this.isLoading = false;
 
             this.resendEmail = false;
             this.clearErrors();

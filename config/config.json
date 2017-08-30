@@ -12,5 +12,6 @@
     "ExitEmail": "C:\\Projects\\HappyHours\\HappyHours.App\\HappyHours.Logic\\Emails\\Templates\\ExitEmail.html"
   },
   "DomainName": "happyHours.web",
-  "UserArrivalSchedulerInterval": 1800
+  "UserArrivalSchedulerInterval": 1800,
+  "SignupActivationRequired": false
 }

@@ -16,5 +16,7 @@ namespace HappyHours.Models.Signup
         public IEnumerable<DayTimeDetails> Days { get; set; }
 
         public string User { get; set; }
+
+        public bool IsEmailVerificationRequired { get; set; }
     }
 }

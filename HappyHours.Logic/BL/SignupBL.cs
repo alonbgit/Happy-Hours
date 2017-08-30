@@ -21,8 +21,11 @@ namespace HappyHours.Logic.BL
 
             if (result != null)
             {
-                if (!result.IsEmailVerified == true)
-                    throw new HappyHourException(ErrorCode.EmailNotVerified);
+                if (ConfigHelper.Config.SignupActivationRequired)
+                {
+                    if (!result.IsEmailVerified == true)
+                        throw new HappyHourException(ErrorCode.EmailNotVerified);
+                }
 
                 throw new HappyHourException(ErrorCode.EmailAlreadyExist);
             }
@@ -54,9 +57,11 @@ namespace HappyHours.Logic.BL
             if (signupResult.EmailExist == true)
                 throw new HappyHourException(ErrorCode.EmailAlreadyExist);
 
-            var activationLink = CreateActivationLink(signupResult.ActivationToken.Value.ToString());
-
-            SendActivationEmail(request.Email, summaryResult.User, activationLink);
+            if (ConfigHelper.Config.SignupActivationRequired)
+            {
+                var activationLink = CreateActivationLink(signupResult.ActivationToken.Value.ToString());
+                SendActivationEmail(request.Email, summaryResult.User, activationLink);
+            }
 
             return new SignupResponse()
             {
@@ -70,7 +75,8 @@ namespace HappyHours.Logic.BL
                     Date = HappyHourTimestampProvider.GetDateTimestamp(c.Date),
                     StartTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.StartTime),
                     EndTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.EndTime)
-                }).ToList()
+                }).ToList(),
+                IsEmailVerificationRequired = ConfigHelper.Config.SignupActivationRequired
             };
         }
 

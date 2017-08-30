@@ -22,8 +22,11 @@ namespace HappyHours.Logic.BL
             if (result == null)
                 throw new HappyHourException(ErrorCode.InvalidUser);
 
-            if (!result.IsEmailVerified)
-                throw new HappyHourException(ErrorCode.EmailNotVerified);
+            if (ConfigHelper.Config.SignupActivationRequired)
+            {
+                if (!result.IsEmailVerified)
+                    throw new HappyHourException(ErrorCode.EmailNotVerified);
+            }
 
             var today = DateTime.Today;
 

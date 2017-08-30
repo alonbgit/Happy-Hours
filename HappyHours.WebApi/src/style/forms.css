@@ -8,6 +8,11 @@
   padding-bottom: 20px;
 }
 
+.form-container.disabled {
+  opacity: 0.5;
+  pointer-events:none;
+}
+
 .form-header {
   height: 31px;
   width: 100%;
