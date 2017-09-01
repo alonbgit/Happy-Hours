@@ -7,11 +7,14 @@
     </ElementType>
   </Function>
   <Function Name="dbo.sp_Signup" Method="sp_Signup">
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="SystemEmail" Parameter="systemEmail" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="SystemPassword" Parameter="systemPassword" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="SystemNumber" Parameter="systemNumber" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="IsActivationRequired" Parameter="isActivationRequired" Type="System.Boolean" DbType="Bit" />
     <ElementType Name="sp_SignupResult">
       <Column Name="EmailExist" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="ActivationToken" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
@@ -29,6 +32,8 @@
   <Function Name="dbo.sp_GetUserDetails" Method="sp_GetUserDetails">
     <ElementType Name="sp_GetUserDetailsResult">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="SystemEmail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />

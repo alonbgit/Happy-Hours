@@ -30,29 +30,13 @@ namespace HappyHours.Logic.BL
                 throw new HappyHourException(ErrorCode.EmailAlreadyExist);
             }
 
-            var today = DateTime.Today;
-
-            var loginParameters = new HappyHoursLoginParameters()
-            {
-                Credentials = new HappyHoursCredentials()
-                {
-                    Username = request.SystemEmail,
-                    Password = request.SystemPassword,
-                    Number = request.SystemNumber
-                },
-                StartDate = new DateTime(today.Year, today.Month, 1),
-                EndDate = today
-            };
-
-            HappyHoursCoreBL manager = new HappyHoursCoreBL();
-            HappyHourSummary summaryResult = manager.GetSummary(loginParameters);
-
             var md5Password = Md5SecurityHelper.GetMd5Hash(request.Password);
 
             var encyptedSystemPassword = PasswordEncryptor.Encrypt(request.SystemPassword);
             var encryptedSystemNumber = PasswordEncryptor.Encrypt(request.SystemNumber);
 
-            var signupResult = db.sp_Signup(request.Email, md5Password, request.SystemEmail, encyptedSystemPassword, encryptedSystemNumber).FirstOrDefault();
+            var signupResult = db.sp_Signup(request.FirstName, request.LastName, request.Email,
+                md5Password, request.SystemEmail, encyptedSystemPassword, encryptedSystemNumber, ConfigHelper.Config.SignupActivationRequired).FirstOrDefault();
 
             if (signupResult.EmailExist == true)
                 throw new HappyHourException(ErrorCode.EmailAlreadyExist);
@@ -60,22 +44,12 @@ namespace HappyHours.Logic.BL
             if (ConfigHelper.Config.SignupActivationRequired)
             {
                 var activationLink = CreateActivationLink(signupResult.ActivationToken.Value.ToString());
-                SendActivationEmail(request.Email, summaryResult.User, activationLink);
+                string fullName = string.Format("{0} {1}", request.FirstName, request.LastName);
+                SendActivationEmail(request.Email, fullName, activationLink);
             }
 
             return new SignupResponse()
             {
-                User = summaryResult.User,
-                ExtraMinutes = summaryResult.ExtraMinutes,
-                LackMinutes = summaryResult.LackMinutes,
-                Days = summaryResult.DayDetails.Select(c => new DayTimeDetails()
-                {
-                    ExtraMinutes = c.ExtraMinutes,
-                    LackMinutes = c.LackMinutes,
-                    Date = HappyHourTimestampProvider.GetDateTimestamp(c.Date),
-                    StartTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.StartTime),
-                    EndTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.EndTime)
-                }).ToList(),
                 IsEmailVerificationRequired = ConfigHelper.Config.SignupActivationRequired
             };
         }

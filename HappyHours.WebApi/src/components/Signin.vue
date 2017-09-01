@@ -54,6 +54,8 @@
   import storageManager from '../storageManager';
   import Loading from './Loading.vue';
 
+  import { mapActions } from 'vuex';
+
   export default {
 
     components: {
@@ -74,6 +76,10 @@
     },
 
     methods: {
+
+      ...mapActions([
+        'fetchUserDetails'
+      ]),
 
       signin() {
 
@@ -98,7 +104,9 @@
 
             storageManager.setTokenBearer(data.access_token);
 
-            this.$router.push('/');
+            this.fetchUserDetails();
+
+            //this.$router.push('/');
 
           }, (error) => {
 

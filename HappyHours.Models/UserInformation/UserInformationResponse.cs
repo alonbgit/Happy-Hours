@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HappyHours.Models.Signin
+namespace HappyHours.Models.UserInformation
 {
-    public class SigninResponse : BaseResponse
+    public class UserInformationResponse : BaseResponse
     {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         public int ExtraMinutes { get; set; }
 
         public int LackMinutes { get; set; }
 
         public IEnumerable<DayTimeDetails> Days { get; set; }
-
-        public string UserDisplayName { get; set; }
-
-        public long UserId { get; set; } 
     }
 }

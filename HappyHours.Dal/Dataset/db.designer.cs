@@ -70,9 +70,9 @@ namespace HappyHours.Dal.Dataset
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Signup")]
-		public ISingleResult<sp_SignupResult> sp_Signup([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="NVarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="NVarChar(50)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SystemEmail", DbType="NVarChar(50)")] string systemEmail, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SystemPassword", DbType="NVarChar(50)")] string systemPassword, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SystemNumber", DbType="NVarChar(50)")] string systemNumber)
+		public ISingleResult<sp_SignupResult> sp_Signup([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="NVarChar(50)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="NVarChar(50)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="NVarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="NVarChar(50)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SystemEmail", DbType="NVarChar(50)")] string systemEmail, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SystemPassword", DbType="NVarChar(50)")] string systemPassword, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SystemNumber", DbType="NVarChar(50)")] string systemNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IsActivationRequired", DbType="Bit")] System.Nullable<bool> isActivationRequired)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password, systemEmail, systemPassword, systemNumber);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), firstName, lastName, email, password, systemEmail, systemPassword, systemNumber, isActivationRequired);
 			return ((ISingleResult<sp_SignupResult>)(result.ReturnValue));
 		}
 		
@@ -224,6 +224,10 @@ namespace HappyHours.Dal.Dataset
 		
 		private long _Id;
 		
+		private string _FirstName;
+		
+		private string _LastName;
+		
 		private string _Email;
 		
 		private string _Password;
@@ -254,6 +258,38 @@ namespace HappyHours.Dal.Dataset
 				if ((this._Id != value))
 				{
 					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
 				}
 			}
 		}

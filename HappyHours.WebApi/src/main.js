@@ -5,6 +5,7 @@ import { routes } from './routes';
 import VeeValidate from 'vee-validate';
 import VueResource from 'vue-resource';
 import storageManager from './storageManager';
+import { store } from './store/store';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
@@ -23,10 +24,11 @@ Vue.http.interceptors.push((request, next) => {
 const router = new VueRouter({
   routes,
   mode: 'history'
-})
+});
 
 new Vue({
   el: '#app',
+  store: store,
   router: router,
   render: h => h(App)
 })

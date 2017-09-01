@@ -19,5 +19,10 @@ namespace HappyHours.WebApi.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        protected string GetUsername()
+        {
+            return Request.GetOwinContext().Authentication.User.Identity.Name;
+        }
     }
 }

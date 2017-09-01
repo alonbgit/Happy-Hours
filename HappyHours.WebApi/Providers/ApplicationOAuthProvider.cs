@@ -54,11 +54,15 @@ namespace HappyHours.WebApi.Providers
             }
 
             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationType);
+
+            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            context.Validated(oAuthIdentity);
+
+            /*ClaimsIdentity cookiesIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationType);
             AuthenticationProperties properties = CreateProperties(context.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
+            context.Request.Context.Authentication.SignIn(cookiesIdentity);*/
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

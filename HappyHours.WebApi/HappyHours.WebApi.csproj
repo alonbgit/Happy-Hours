@@ -255,9 +255,9 @@
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
-    <Compile Include="Controllers\SigninController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\UpdateInformationController.cs" />
+    <Compile Include="Controllers\UserInformationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

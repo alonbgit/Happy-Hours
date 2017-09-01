@@ -11,7 +11,22 @@
 
         <div v-show="currentStep == 1">
           <div class="form-item">
+            <label>First Name</label>
+            <div class="input-item">
+              <input type="text" placeholder="First Name" v-model="user.firstName" name="firstName" v-validate="'required'" data-vv-as="First Name"/>
+              <div class="field-error" v-show="errors.has('firstName') && fields.firstName.touched">{{ errors.first('firstName') }}</div>
+            </div>
+          </div>
 
+          <div class="form-item">
+            <label>Last Name</label>
+            <div class="input-item">
+              <input type="text" placeholder="Last Name" v-model="user.lastName" name="lastName" v-validate="'required'" data-vv-as="Last Name"/>
+              <div class="field-error" v-show="errors.has('lastName') && fields.lastName.touched">{{ errors.first('lastName') }}</div>
+            </div>
+          </div>
+
+          <div class="form-item">
             <label>Email</label>
             <div class="input-item">
               <input type="text" placeholder="Email" v-model="user.email" name="email" v-validate="'required|email'" data-vv-as="Email"/>
@@ -116,6 +131,8 @@
       return {
         currentStep: 1,
         user: {
+          firstName: '',
+          lastName: '',
           email: '',
           password: '',
           confirmPassword: '',
@@ -148,7 +165,7 @@
         this.$validator.validateAll().then((isValid) => {
 
           // mark the step1 fields as touched, as we want to see the errors
-          this.markFieldsAsTouched(['email', 'password', 'confirmPassword']);
+          this.markFieldsAsTouched(['firstName', 'lastName', 'email', 'password', 'confirmPassword']);
 
           if (!isValid)
             return;
@@ -237,6 +254,8 @@
       perfornSignup() {
 
         return this.$http.post('api/Signup', {
+          firstName: this.user.firstName,
+          lastName: this.user.lastName,
           email: this.user.email,
           password: this.user.password,
           systemEmail: this.user.systemEmail,
