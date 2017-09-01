@@ -2,22 +2,30 @@
 <template>
 
   <div class="header">
-    
-    <router-link to="/">
-      <img src="../../images/logo-small.png" class="logo"/>
-    </router-link>
 
-    <ul>
-      <router-link to="/Signup" tag="li" v-if="!logged">
-        <span>Signup</span>
+    <div class="inner-header">
+
+      <router-link to="/">
+        <img src="../../images/logo-small.png" class="logo"/>
       </router-link>
-      <router-link to="/Signin" tag="li" v-if="!logged">
-        <span>Signin</span>
-      </router-link>
-      <li @click="logout" v-if="logged">
-        <span>Logout</span>
-      </li>
-    </ul>
+
+      <ul>
+        <router-link to="/Signup" tag="li" v-if="!logged">
+          <span>Sign Up</span>
+        </router-link>
+        <router-link to="/Signin" tag="li" v-if="!logged">
+          <span>Sign In</span>
+        </router-link>
+        <li @click="logout" v-if="logged">
+          <span>Logout</span>
+        </li>
+      </ul>
+
+      <div class="user-info" v-if="logged">
+        Hello {{ fullName }}
+      </div>
+
+    </div>
 
   </div>
 
@@ -31,7 +39,8 @@
 
     computed: {
       ...mapGetters([
-        'logged'
+        'logged',
+        'fullName'
       ])
     },
 
@@ -53,9 +62,21 @@
     height: 75px;
     width: 100%;
     margin: 0px;
-    background-color: #70c93c;
+    background-color: #3B5998;
     border-bottom: 1px solid #367a0c;
     line-height: 75px;
+    color: white;
+  }
+
+  .inner-header {
+    width: 70%;
+    margin: auto;
+  }
+
+  .user-info {
+    float: left;
+    margin-left: 30px;
+    font-weight: bold;
   }
 
   .logo {
@@ -86,8 +107,7 @@
   }
 
   ul li:hover {
-    background-color: #b3f28c;
-    color: #41443e;
+    background-color: #6179a5;
     opacity: 0.7;
     cursor: pointer;
   }

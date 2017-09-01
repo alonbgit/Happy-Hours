@@ -9,7 +9,8 @@ const state = {
   firstName: '',
   lastName: '',
   logged: false,
-  isLoadingSignin: false
+  isLoadingSignin: false,
+  fetchUserInfo: false
 
 };
 
@@ -23,12 +24,20 @@ const getters = {
     return state.lastName;
   },
 
+  fullName(state) {
+    return `${state.firstName} ${state.lastName}`;
+  },
+
   logged(state) {
     return state.logged;
   },
 
   isLoadingSignin(state) {
     return state.isLoadingSignin;
+  },
+
+  fetchUserInfo(state) {
+    return state.fetchUserInfo;
   }
 
 };
@@ -37,15 +46,29 @@ const mutations = {
 
   fetchUserDetails(state, payload) {
 
-    Vue.http.get('api/UserInformation').then((data) => {
+    if (payload && payload.startup)
+      state.fetchUserInfo = true;
+
+    Vue.http.get('api/UserInformation').then((response) => {
+
+      return response.json();
+
+    }).then((data) => {
+
+      state.firstName = data.FirstName;
+      state.lastName = data.LastName;
 
       state.logged  = true;
       state.isLoadingSignin = false;
+
+      state.fetchUserInfo = false;
 
       // push the user to the main page after the signin
       router.push('/');
 
     }, (error) => {
+
+      state.fetchUserInfo = false;
 
       state.isLoadingSignin = false;
 

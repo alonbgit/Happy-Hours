@@ -8,6 +8,7 @@ import { router } from './main';
 import storageManager from './storageManager';
 
 export const routes = [
+
   { path: '/', component: Home },
 
   { path: '/Signin', component: Signin, beforeEnter: (to, from, next) => {
@@ -36,4 +37,5 @@ export const routes = [
   { path: '/ForgotPassword', component: ForgotPassword },
 
   { path: '/ActivateEmail', component: ActivateEmail }
+  
 ];

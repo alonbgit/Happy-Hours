@@ -47,7 +47,7 @@
   .create-account-btn {
     width: 170px;
     height: 34px;
-    background-color: #68c92c;
+    background-color: #669F52;
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -74,7 +74,6 @@
   }
 
   p {
-    color: #929390;
     font-size: 13px;
   }
 

@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!fetchUserInfo">
     <app-header/>
-    <router-view/>
+    <div class="layout">
+      <router-view/>
+    </div>
     <app-footer/>
   </div>
 </template>
@@ -13,7 +15,7 @@
 
   import storageManager from './storageManager';
 
-  import { mapActions } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
 
@@ -22,10 +24,19 @@
       appFooter: Footer
     },
 
+    computed: {
+
+      ...mapGetters([
+        'fetchUserInfo'
+      ])
+
+    },
+
     methods: {
 
       ...mapActions([
-        'setLogged'
+        'setLogged',
+        'fetchUserDetails'
       ])
 
     },
@@ -33,7 +44,8 @@
     created() {
 
       if (storageManager.getTokenBearer()) {
-        this.setLogged(true);
+        this.fetchUserDetails({startup: true});
+        //this.setLogged(true);
       }
 
     }
@@ -43,11 +55,19 @@
 </script>
 
 <style scoped>
+
   @import 'style/style.css';
   @import 'style/forms.css';
   @import 'style/buttons.css';
 
   .container {
     height: 100%;
+    background: #E9EBEE;
   }
+
+  .layout {
+    width: 70%;
+    margin: auto;
+  }
+
 </style>
