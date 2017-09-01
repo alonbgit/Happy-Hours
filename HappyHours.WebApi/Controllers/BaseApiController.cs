@@ -24,5 +24,10 @@ namespace HappyHours.WebApi.Controllers
         {
             return Request.GetOwinContext().Authentication.User.Identity.Name;
         }
+
+        protected long GetUserId()
+        {
+            return Convert.ToInt64(Request.GetOwinContext().Authentication.User.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+        }
     }
 }

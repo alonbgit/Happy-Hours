@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div class="form-container" :class="{ 'disabled': isLoading }">
+    <div class="form-container" :class="{ 'disabled': isLoadingSignin }">
 
       <div class="form-header">
         <span>Signin</span>
@@ -37,7 +37,7 @@
 
         <div class="form-item">
           <button class="btn btn-right" @click.prevent="signin">Signin</button>
-          <app-loading isLoading="isLoading" v-if="isLoading"/>
+          <app-loading isLoading="isLoadingSignin" v-if="isLoadingSignin"/>
         </div>
 
       </div>
@@ -54,7 +54,7 @@
   import storageManager from '../storageManager';
   import Loading from './Loading.vue';
 
-  import { mapActions } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
 
@@ -70,15 +70,23 @@
           email: '',
           password: ''
         },
-        resendEmail: false,
-        isLoading: false
+        resendEmail: false
       }
+    },
+
+    computed: {
+
+      ...mapGetters([
+        'isLoadingSignin'
+      ])
+
     },
 
     methods: {
 
       ...mapActions([
-        'fetchUserDetails'
+        'fetchUserDetails',
+        'setIsLoadingSignin'
       ]),
 
       signin() {
@@ -92,12 +100,10 @@
           if (!isValid)
             return;
 
-          this.isLoading = true;
+          this.setIsLoadingSignin(true);
 
           // in case all validations passed, we perform ajax call to signin
           this.performSignin().then(({data}) => {
-
-            this.isLoading = false;
 
             this.resendEmail = false;
             this.clearErrors();
@@ -110,7 +116,7 @@
 
           }, (error) => {
 
-            this.isLoading = false;
+            this.setIsLoadingSignin(false);
 
             this.resendEmail = false;
             this.clearErrors();

@@ -1,23 +1,47 @@
 
 <template>
+
   <div class="header">
+    
     <router-link to="/">
       <img src="../../images/logo-small.png" class="logo"/>
     </router-link>
+
     <ul>
-      <router-link to="/Signup" tag="li">
+      <router-link to="/Signup" tag="li" v-if="!logged">
         <span>Signup</span>
       </router-link>
-      <router-link to="/Signin" tag="li">
+      <router-link to="/Signin" tag="li" v-if="!logged">
         <span>Signin</span>
       </router-link>
+      <li @click="logout" v-if="logged">
+        <span>Logout</span>
+      </li>
     </ul>
+
   </div>
+
 </template>
 
 <script>
 
+  import { mapGetters, mapActions } from 'vuex';
+
   export default {
+
+    computed: {
+      ...mapGetters([
+        'logged'
+      ])
+    },
+
+    methods: {
+
+      ...mapActions([
+        'logout'
+      ])
+
+    }
 
   }
 

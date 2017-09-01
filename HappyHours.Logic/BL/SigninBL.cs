@@ -13,7 +13,7 @@ namespace HappyHours.Logic.BL
 {
     public class SigninBL
     {
-        public BaseResponse Signin(SigninRequest request, dbDataContext db)
+        public SigninResponse Signin(SigninRequest request, dbDataContext db)
         {
             var md5Password = Md5SecurityHelper.GetMd5Hash(request.Password);
 
@@ -28,7 +28,10 @@ namespace HappyHours.Logic.BL
                     throw new HappyHourException(ErrorCode.EmailNotVerified);
             }
 
-            return new BaseResponse();
+            return new SigninResponse()
+            {
+                UserId = result.Id
+            };
         }
     }
 }

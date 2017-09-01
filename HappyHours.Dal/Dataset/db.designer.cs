@@ -83,6 +83,13 @@ namespace HappyHours.Dal.Dataset
 			return ((ISingleResult<sp_CheckAndUpdateUserTimesResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserById")]
+		public ISingleResult<sp_GetUserByIdResult> sp_GetUserById([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserId", DbType="BigInt")] System.Nullable<long> userId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId);
+			return ((ISingleResult<sp_GetUserByIdResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserDetails")]
 		public ISingleResult<sp_GetUserDetailsResult> sp_GetUserDetails()
 		{
@@ -214,6 +221,194 @@ namespace HappyHours.Dal.Dataset
 				if ((this._NewExitTime != value))
 				{
 					this._NewExitTime = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetUserByIdResult
+	{
+		
+		private long _Id;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _Email;
+		
+		private string _Password;
+		
+		private string _SystemEmail;
+		
+		private string _SystemPassword;
+		
+		private string _SystemNumber;
+		
+		private bool _IsEmailVerified;
+		
+		private System.DateTime _CreatedDate;
+		
+		public sp_GetUserByIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="BigInt NOT NULL")]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this._Password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemEmail", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string SystemEmail
+		{
+			get
+			{
+				return this._SystemEmail;
+			}
+			set
+			{
+				if ((this._SystemEmail != value))
+				{
+					this._SystemEmail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemPassword", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string SystemPassword
+		{
+			get
+			{
+				return this._SystemPassword;
+			}
+			set
+			{
+				if ((this._SystemPassword != value))
+				{
+					this._SystemPassword = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemNumber", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string SystemNumber
+		{
+			get
+			{
+				return this._SystemNumber;
+			}
+			set
+			{
+				if ((this._SystemNumber != value))
+				{
+					this._SystemNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEmailVerified", DbType="Bit NOT NULL")]
+		public bool IsEmailVerified
+		{
+			get
+			{
+				return this._IsEmailVerified;
+			}
+			set
+			{
+				if ((this._IsEmailVerified != value))
+				{
+					this._IsEmailVerified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
 				}
 			}
 		}
@@ -456,12 +651,6 @@ namespace HappyHours.Dal.Dataset
 		
 		private long _Id;
 		
-		private string _SystemEmail;
-		
-		private string _SystemPassword;
-		
-		private string _SystemNumber;
-		
 		private bool _IsEmailVerified;
 		
 		public sp_SigninResult()
@@ -480,54 +669,6 @@ namespace HappyHours.Dal.Dataset
 				if ((this._Id != value))
 				{
 					this._Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemEmail", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string SystemEmail
-		{
-			get
-			{
-				return this._SystemEmail;
-			}
-			set
-			{
-				if ((this._SystemEmail != value))
-				{
-					this._SystemEmail = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemPassword", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string SystemPassword
-		{
-			get
-			{
-				return this._SystemPassword;
-			}
-			set
-			{
-				if ((this._SystemPassword != value))
-				{
-					this._SystemPassword = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemNumber", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string SystemNumber
-		{
-			get
-			{
-				return this._SystemNumber;
-			}
-			set
-			{
-				if ((this._SystemNumber != value))
-				{
-					this._SystemNumber = value;
 				}
 			}
 		}

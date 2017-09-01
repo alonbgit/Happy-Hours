@@ -21,7 +21,7 @@ Vue.http.interceptors.push((request, next) => {
   next()
 });
 
-const router = new VueRouter({
+export const router = new VueRouter({
   routes,
   mode: 'history'
 });

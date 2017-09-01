@@ -20,8 +20,8 @@ namespace HappyHours.WebApi.Controllers
         [HttpGet]
         public UserInformationResponse Index(BaseRequest request)
         {
-            var username = GetUsername();
-            return BL.GetUserInformation(request, db);
+            var userId = GetUserId();
+            return BL.GetUserInformation(request, userId, db);
         }
     }
 }

@@ -32,6 +32,7 @@ namespace HappyHours.WebApi.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             SigninBL bl = new SigninBL();
+            long userId = 0;
             using (dbDataContext db = new dbDataContext())
             {
                 try
@@ -41,6 +42,8 @@ namespace HappyHours.WebApi.Providers
                         Email = context.UserName,
                         Password = context.Password
                     }, db);
+
+                    userId = response.UserId;
                 }
                 catch(HappyHourException ex)
                 {
@@ -56,6 +59,7 @@ namespace HappyHours.WebApi.Providers
             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
 
             oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            oAuthIdentity.AddClaim(new Claim("UserId", userId.ToString()));
             context.Validated(oAuthIdentity);
 
             /*ClaimsIdentity cookiesIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationType);
