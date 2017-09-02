@@ -61,13 +61,13 @@
   @import 'style/buttons.css';
 
   .container {
-    height: 100%;
-    background: #E9EBEE;
+    height: 600px;
   }
 
   .layout {
     width: 70%;
     margin: auto;
+    height: 100%;
   }
 
 </style>

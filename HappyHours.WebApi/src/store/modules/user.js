@@ -6,8 +6,7 @@ import { router } from '../../main';
 
 const state = {
 
-  firstName: '',
-  lastName: '',
+  userInfo: null,
   logged: false,
   isLoadingSignin: false,
   fetchUserInfo: false
@@ -16,16 +15,12 @@ const state = {
 
 const getters = {
 
-  firstName(state) {
-    return state.firstName;
-  },
-
-  lastName(state) {
-    return state.lastName;
+  userInfo(state) {
+    return state.userInfo;
   },
 
   fullName(state) {
-    return `${state.firstName} ${state.lastName}`;
+    return `${state.userInfo.FirstName} ${state.userInfo.LastName}`;
   },
 
   logged(state) {
@@ -55,8 +50,7 @@ const mutations = {
 
     }).then((data) => {
 
-      state.firstName = data.FirstName;
-      state.lastName = data.LastName;
+      state.userInfo = data;
 
       state.logged  = true;
       state.isLoadingSignin = false;
@@ -90,6 +84,8 @@ const mutations = {
 
       storageManager.clearTokenBearer();
       state.logged = false;
+
+      router.push('/');
 
     }, (error) => {
 

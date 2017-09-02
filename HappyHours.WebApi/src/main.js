@@ -11,6 +11,11 @@ Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueResource);
 
+export const router = new VueRouter({
+  routes,
+  mode: 'history'
+});
+
 Vue.http.options.root = 'http://HappyHours.Web/';
 
 Vue.http.interceptors.push((request, next) => {
@@ -18,12 +23,13 @@ Vue.http.interceptors.push((request, next) => {
   if (token) {
     request.headers.set('Authorization', `Bearer ${token}`);
   }
-  next()
-});
-
-export const router = new VueRouter({
-  routes,
-  mode: 'history'
+  next((response) => {
+    debugger;
+    if (response.status == 401) {
+      storageManager.clearTokenBearer();
+      router.push('/');
+    }
+  });
 });
 
 new Vue({
