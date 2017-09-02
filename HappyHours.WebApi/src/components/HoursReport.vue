@@ -84,7 +84,7 @@
 <style scoped>
 
   .hours-report-container {
-    min-height: 790px;
+    min-height: 890px;
   }
 
   .summary {

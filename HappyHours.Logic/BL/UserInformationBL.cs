@@ -28,7 +28,14 @@ namespace HappyHours.Logic.BL
 
             //var today = DateTime.Today; // new DateTime(2017, 8, 1).Date;
             var startDate = new DateTime(DateTime.Today.Year, month, 1);
-            var endDate = new DateTime(DateTime.Today.Year, month, DateTime.DaysInMonth(DateTime.Today.Year, month));
+
+            int daysInMonth = 0;
+            if (month == DateTime.Today.Month)
+                daysInMonth = DateTime.Today.Day;
+            else
+                daysInMonth = DateTime.DaysInMonth(DateTime.Today.Year, month);
+
+            var endDate = new DateTime(DateTime.Today.Year, month, daysInMonth);
 
             var decryptedSystemPassword = PasswordEncryptor.Decrypt(user.SystemPassword);
             var decryptedSystemNumber = PasswordEncryptor.Decrypt(user.SystemNumber);
