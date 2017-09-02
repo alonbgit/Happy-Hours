@@ -136,9 +136,9 @@
           email: '',
           password: '',
           confirmPassword: '',
-          systemEmail: 'alon.b@appnext.com',
-          systemPassword: '200357648',
-          systemNumber: '623115'
+          systemEmail: '',
+          systemPassword: '',
+          systemNumber: ''
         },
         isLoading: false
       }
