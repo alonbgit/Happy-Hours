@@ -44,12 +44,10 @@
 <style>
 
   .footer {
-    height: 180px;
-    background: white;
-    position: relative;
-    bottom: 0;
+    height: 150px;
     width: 100%;
-    padding-top: 20px;
+    background: white;
+    padding-top: 50px;
   }
 
   .inner-footer {

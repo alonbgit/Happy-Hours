@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hours-report-container">
     <app-hours-grid/>
   </div>
 </template>
@@ -19,5 +19,9 @@
 </script>
 
 <style scoped>
+
+  .hours-report-container {
+
+  }
 
 </style>

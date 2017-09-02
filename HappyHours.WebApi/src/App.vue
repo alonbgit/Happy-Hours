@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!fetchUserInfo">
+  <div class="app-container" v-if="!fetchUserInfo">
     <app-header/>
     <div class="layout">
       <router-view/>
@@ -60,14 +60,16 @@
   @import 'style/forms.css';
   @import 'style/buttons.css';
 
-  .container {
-    height: 600px;
+  .app-container {
+    background: #E9EBEE;
   }
 
   .layout {
     width: 70%;
     margin: auto;
-    height: 100%;
+    min-height: 600px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
 
 </style>
