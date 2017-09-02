@@ -44,7 +44,7 @@ const mutations = {
     if (payload && payload.startup)
       state.fetchUserInfo = true;
 
-    Vue.http.get('api/UserInformation').then((response) => {
+    Vue.http.post('api/UserInformation').then((response) => {
 
       return response.json();
 

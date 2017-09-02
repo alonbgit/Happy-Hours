@@ -17,8 +17,8 @@ namespace HappyHours.WebApi.Controllers
     {
         public UserInformationBL BL = new UserInformationBL();
 
-        [HttpGet]
-        public UserInformationResponse Index(BaseRequest request)
+        [HttpPost]
+        public UserInformationResponse Index(UserInformationRequest request)
         {
             var userId = GetUserId();
             return BL.GetUserInformation(request, userId, db);

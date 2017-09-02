@@ -18,5 +18,7 @@ namespace HappyHours.Models.UserInformation
         public int LackMinutes { get; set; }
 
         public IEnumerable<DayTimeDetails> Days { get; set; }
+
+        public IEnumerable<MonthDetails> Months { get; set; }
     }
 }

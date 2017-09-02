@@ -6,6 +6,7 @@ using HappyHours.Models.Common;
 using HappyHours.Models.UserInformation;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,20 @@ namespace HappyHours.Logic.BL
 {
     public class UserInformationBL
     {
-        public UserInformationResponse GetUserInformation(BaseRequest request, long userId, dbDataContext db)
+        public UserInformationResponse GetUserInformation(UserInformationRequest request, long userId, dbDataContext db)
         {
             var user = GetUserDetails(userId, db);
 
-            var today = new DateTime(2017, 8, 1).Date; //DateTime.Today;
+            int month = 0;
+
+            if (request == null || request.Month == null)
+                month = DateTime.Today.Month;
+            else
+                month = request.Month.Value;
+
+            //var today = DateTime.Today; // new DateTime(2017, 8, 1).Date;
+            var startDate = new DateTime(DateTime.Today.Year, month, 1);
+            var endDate = new DateTime(DateTime.Today.Year, month, DateTime.DaysInMonth(DateTime.Today.Year, month));
 
             var decryptedSystemPassword = PasswordEncryptor.Decrypt(user.SystemPassword);
             var decryptedSystemNumber = PasswordEncryptor.Decrypt(user.SystemNumber);
@@ -31,12 +41,23 @@ namespace HappyHours.Logic.BL
                     Password = decryptedSystemPassword,
                     Number = decryptedSystemNumber
                 },
-                StartDate = new DateTime(today.Year, today.Month, 1),
-                EndDate = new DateTime(2017, 8, 31).Date //today
+                StartDate = startDate,
+                EndDate = endDate //today // new DateTime(2017, 8, 31).Date
             };
 
             HappyHoursCoreBL manager = new HappyHoursCoreBL();
             HappyHourSummary summaryResult = manager.GetSummary(loginParameters);
+
+            IList<MonthDetails> months = new List<MonthDetails>();
+            CultureInfo usEnglish = new CultureInfo("en-US");
+            for (var i = 1; i <= DateTime.Today.Month; i++)
+            {
+                months.Add(new MonthDetails()
+                {
+                    Month = i,
+                    Name = usEnglish.DateTimeFormat.GetMonthName(i)
+                });
+            }
 
             return new UserInformationResponse()
             {
@@ -52,7 +73,8 @@ namespace HappyHours.Logic.BL
                     StartTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.StartTime),
                     EndTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.EndTime),
                     Day = c.Day
-                }).ToList()
+                }).ToList(),
+                Months = months
             };
         }
 
