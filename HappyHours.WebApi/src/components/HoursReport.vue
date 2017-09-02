@@ -3,7 +3,7 @@
 
     <div>
       <app-hours-grid class="hours-grid"/>
-      <app-dropdown :data="dropdownData" :selectedIndex="dropdownData.length - 1" class="dropdown" @changed="onMonthChange"/>
+      <label class="month-label">Month: </label><app-dropdown :data="dropdownData" :selectedIndex="dropdownData.length - 1" class="dropdown" @changed="onMonthChange"/>
     </div>
 
     <div class="summary">
@@ -83,6 +83,10 @@
 
 <style scoped>
 
+  .hours-report-container {
+    min-height: 790px;
+  }
+
   .summary {
       margin-top: 40px;
       font-weight: bold;
@@ -91,7 +95,7 @@
       float: left;
   }
 
-  label {
+  .summary label {
     width: 200px;
     display: inline-block;
     text-decoration: underline;
@@ -103,7 +107,15 @@
 
   .dropdown {
     float: left;
+    margin-left: 20px;
+  }
+
+  .month-label {
+    float: left;
     margin-left: 100px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
   }
 
 </style>
