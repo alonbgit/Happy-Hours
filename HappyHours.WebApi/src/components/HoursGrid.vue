@@ -51,4 +51,13 @@
     color: white;
   }
 
+  tr {
+    cursor: pointer;
+  }
+
+  tr:hover {
+    background: #3B5998;
+    color: white;
+  }
+
 </style>
