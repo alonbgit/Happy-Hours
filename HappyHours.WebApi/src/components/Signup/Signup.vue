@@ -70,7 +70,7 @@
           <div class="form-item">
             <label>TA Employee Number</label>
             <div class="input-item">
-              <input type="text" placeholder="TA Employee Number" v-model="user.systemNumber" name="taNumber" v-validate="'required'" data-vv-as="TA Employee Number"/>
+              <input type="password" placeholder="TA Employee Number" v-model="user.systemNumber" name="taNumber" v-validate="'required'" data-vv-as="TA Employee Number"/>
               <div class="field-error" v-show="errors.has('taNumber') && fields.taPassword.touched">{{ errors.first('taNumber') }}</div>
             </div>
           </div>
