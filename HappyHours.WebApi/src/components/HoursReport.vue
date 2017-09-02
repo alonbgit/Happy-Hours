@@ -27,7 +27,7 @@
   import HoursGrid from './HoursGrid.vue';
   import Dropdown from './Dropdown.vue';
 
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
 
@@ -47,8 +47,14 @@
 
     methods: {
 
+      ...mapActions([
+        'fetchUserDetails'
+      ]),
+
       onMonthChange(item) {
-        debugger;
+
+        this.fetchUserDetails({month: item.id});
+
       },
 
       getDropdownData() {
