@@ -6,10 +6,13 @@ import VeeValidate from 'vee-validate';
 import VueResource from 'vue-resource';
 import storageManager from './storageManager';
 import { store } from './store/store';
+import minutesFilter from './filters/minutesFilter';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueResource);
+
+Vue.filter('minutes', minutesFilter);
 
 export const router = new VueRouter({
   routes,
@@ -24,7 +27,6 @@ Vue.http.interceptors.push((request, next) => {
     request.headers.set('Authorization', `Bearer ${token}`);
   }
   next((response) => {
-    debugger;
     if (response.status == 401) {
       storageManager.clearTokenBearer();
       router.push('/');

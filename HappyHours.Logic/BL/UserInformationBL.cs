@@ -18,7 +18,7 @@ namespace HappyHours.Logic.BL
         {
             var user = GetUserDetails(userId, db);
 
-            var today = DateTime.Today;
+            var today = new DateTime(2017, 8, 1).Date; //DateTime.Today;
 
             var decryptedSystemPassword = PasswordEncryptor.Decrypt(user.SystemPassword);
             var decryptedSystemNumber = PasswordEncryptor.Decrypt(user.SystemNumber);
@@ -32,7 +32,7 @@ namespace HappyHours.Logic.BL
                     Number = decryptedSystemNumber
                 },
                 StartDate = new DateTime(today.Year, today.Month, 1),
-                EndDate = today
+                EndDate = new DateTime(2017, 8, 31).Date //today
             };
 
             HappyHoursCoreBL manager = new HappyHoursCoreBL();
@@ -50,7 +50,8 @@ namespace HappyHours.Logic.BL
                     LackMinutes = c.LackMinutes,
                     Date = HappyHourTimestampProvider.GetDateTimestamp(c.Date),
                     StartTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.StartTime),
-                    EndTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.EndTime)
+                    EndTime = HappyHourTimestampProvider.GetDateTimeTimestamp(c.EndTime),
+                    Day = c.Day
                 }).ToList()
             };
         }

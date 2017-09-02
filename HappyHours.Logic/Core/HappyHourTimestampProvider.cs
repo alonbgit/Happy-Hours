@@ -12,7 +12,7 @@ namespace HappyHours.Logic.Core
         private const string DATE_FORMAT = "dd'/'MM'/'yyyy";
         private const string TIME_FORMAT = "HH':'mm";
 
-        private const string DATETIME_TIMESTAMP_FORMAT = "yyyy'-'dd'-'MM'T'hh':'mm':'ss'Z'";
+        private const string DATETIME_TIMESTAMP_FORMAT = "HH':'mm";
         private const string DATE_TIMESTAMP_FORMAT = "yyyy'-'dd'-'MM";
 
         public static string GetDateTimestamp(DateTime? date)

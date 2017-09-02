@@ -78,7 +78,8 @@ namespace HappyHours.Logic.Core
                     LackMinutes = lackMinutes,
                     ExtraMinutes = extraMinutes,
                     StartTime = hour.StartTime,
-                    EndTime = hour.EndTime
+                    EndTime = hour.EndTime,
+                    Day = hour.Date.DayOfWeek.ToString()
                 };
                 dayHours.Add(dayOur);
             }

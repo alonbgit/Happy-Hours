@@ -14,6 +14,8 @@ namespace HappyHours.Logic.Core
 
         public DateTime? EndTime { get; set; }
 
+        public string Day { get; set; }
+
         public int ExtraMinutes { get; set; }
 
         public int LackMinutes { get; set; }
