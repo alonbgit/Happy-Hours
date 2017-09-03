@@ -43,6 +43,7 @@
 
   .hours-table {
     border-collapse: collapse;
+    min-width: 700px;
   }
 
   .headers-row {
