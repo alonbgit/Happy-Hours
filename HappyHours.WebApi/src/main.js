@@ -8,7 +8,9 @@ import storageManager from './storageManager';
 import { store } from './store/store';
 import minutesFilter from './filters/minutesFilter';
 
-Vue.use(VueRouter);
+//const dropdown = () => import './components/Dropdown.vue';
+
+Vue.use(VueRouter); 
 Vue.use(VeeValidate);
 Vue.use(VueResource);
 
