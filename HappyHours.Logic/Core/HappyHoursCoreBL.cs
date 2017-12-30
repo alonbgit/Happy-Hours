@@ -129,7 +129,7 @@ namespace HappyHours.Logic.Core
 
             var json = arr.Trim();
 
-            json = json.Replace(@"\", string.Empty);
+            json = json.Replace(@"\", string.Empty).Replace("חוה\"מ סוכות", string.Empty);
 
             var hours = JsonConvert.DeserializeObject<IEnumerable<HourItem>>(json);
 
