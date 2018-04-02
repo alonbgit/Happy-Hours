@@ -8,7 +8,7 @@
 4 verbose stack Error: ENOENT: no such file or directory, open 'C:\Projects\HappyHours\HappyHours.App\package.json'
 4 verbose stack     at Error (native)
 5 verbose cwd C:\Projects\HappyHours\HappyHours.App
-6 error Windows_NT 10.0.15063
+6 error Windows_NT 10.0.16299
 7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev"
 8 error node v6.10.1
 9 error npm  v3.10.10
