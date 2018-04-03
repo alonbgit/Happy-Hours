@@ -45,17 +45,19 @@ namespace HappyHours.Logic.Core
             int totalLackMinutes = 0;
             int totalExtraMinutes = 0;
 
+            var currentDate = DateTime.Today;
+
             foreach (var hour in hours)
             {
                 int lackMinutes = 0;
                 int extraMinutes = 0;
 
-                if (hour.StartTime == null || hour.EndTime == null)
+                if (currentDate != hour.Date && (hour.StartTime == null || hour.EndTime == null))
                 {
                     lackMinutes = minutesPerDay;
                     totalLackMinutes += minutesPerDay;
                 }
-                else
+                else if (hour.StartTime != null && hour.EndTime != null)
                 {
                     var diff = (hour.EndTime - hour.StartTime).Value.TotalMinutes;
 
